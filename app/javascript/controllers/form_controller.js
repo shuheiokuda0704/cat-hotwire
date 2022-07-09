@@ -2,6 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="form"
 export default class extends Controller {
-  connect() {
+  // コントローラーに紐づく要素（=フォーム）をsubmitするアクション
+  submit() {
+    // submit()ではなくrequestSubmit()を使う
+    // submit()だと直でフォームの内容をリクエストしてしまい、Turboがリクエストをインターセプトできない
+    this.element.requestSubmit()
   }
 }
