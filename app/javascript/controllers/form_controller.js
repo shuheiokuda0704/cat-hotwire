@@ -4,8 +4,14 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   // コントローラーに紐づく要素（=フォーム）をsubmitするアクション
   submit() {
-    // submit()ではなくrequestSubmit()を使う
-    // submit()だと直でフォームの内容をリクエストしてしまい、Turboがリクエストをインターセプトできない
-    this.element.requestSubmit()
+    // セットされているTimeoutをクリアする
+    clearTimeout(this.timeout)
+
+    this.timeout = setTimeout(() => {
+      console.log("requestSubmit")
+      // submit()ではなくrequestSubmit()を使う
+      // submit()だと直でフォームの内容をリクエストしてしまい、Turboがリクエストをインターセプトできない
+      this.element.requestSubmit()
+    }, 200)
   }
 }
